@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step03_Document.html</title>
+</head>
+<body>
+    <h1>Document object 사용해보기</h1>
+    <button onclick="change()">바꾸기</button>
+    <p id="one" onmouseover="mouseOn()">p1</p>
+    <p class="my-class">p2</p>
+    <p class="my-class">p3</p>
+    <input type="text" id="two">
+    <button onclick="send()">전송 &rarr;</button>
+    <input type="text" id="three">
+    <script>
+    //h1요소의 innerText의 특정버튼(바꾸기)을 눌렀을 때 바꾸고 싶음
+    let change = () => {
+        document.querySelector("#one").innerText = "h1내용 변경"
+    }
+    //p1에 마우스가 올라왔을떄 innerText를 변경
+    let mouseOn = () => {
+        document.querySelector("p").innerText = "마우스가 올라옴"
+    }
+
+    let send = () => {
+        //1. 첫번째 input요소에 입력한 value를 읽어온다
+        let text = document.querySelector("#two").value; //지역변수
+        document.querySelector("#two").value = null; 
+        /*text로 대체할 수 없는 이유
+          : text는 해당 위치를 가리키는 변수임
+            그 text를 복사해온다고 입력값을 실시간으로 받아올 수 없음
+            null로 삭제하고 싶다면 정확하게 그 위치의 값을 가리켜야함*/
+
+        //2. 위에서 읽어온 value를 두번째 input요소의 value로 넣어준다
+        document.querySelector("#three").value = text;
+    }   
+    </script>
+</body>
+</html>

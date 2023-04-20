@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step08_table3.html</title>
+    <style>
+        *{
+            margin-left:50px;
+        }
+    </style>
+</head>
+<body>
+    <h2>1과 2 column 합치기</h2>
+    <!--colspan : 가로로 합칠 열의 개수-->
+    <table border="1" width="250" height="100">
+        <tr>
+            <td colspan="2">1</td> 
+            <!-- <td>2</td> -->
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+        </tr>
+    </table>
+    <h2>1과 6 row 합치기</h2>
+    <!-- rowspan : 세로로 합칠 행의 개수 -->
+    <table border="1" width="250" height="100">
+        <tr>
+            <td rowspan="2">1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <!-- <td>6</td> -->
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+        </tr>
+    </table>
+    <h2>1, 2, 6, 7 column & row 합치기</h2>
+    <table border="1" width="250" height="100">
+        <tr>
+            <td colspan="2" rowspan="2">1</td>
+            <!-- <td>2</td> -->
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <!-- <td>6</td> -->
+            <!-- <td>7</td> -->
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+        </tr>
+    </table>
+</body>
+</html>

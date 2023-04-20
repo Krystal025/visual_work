@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step03_Document2.html</title>
+    <style>
+        p{
+            color:blue;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            text-align: center;
+            cursor: pointer;
+            transition: margin-left 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>인라인 CSS 테스트</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum est dolore vero eaque reiciendis dolorem possimus enim culpa, harum dignissimos praesentium, quaerat cupiditate dolor id totam officia minus ut. Atque?</p>
+    <div class="box" onclick="move()">눌러보세요</div>
+    <script>
+        let move = () => {
+        document.querySelector(".box").style.marginLeft = "100px";
+        }
+    </script>
+</body>
+</html>

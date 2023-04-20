@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step10_anchor.html</title>
+    <style>
+        .container{
+            width: 768px;
+            margin: 0 auto;
+        }
+        .card{
+            border: 1px solid black;
+            border-radius: 10px;
+            width: 200px;
+        }
+        /* 공백 : 하위 선택자 */
+        .card img{
+            max-width: 100%;  /*부모요소보다 이미지가 커지지 않도록 방지*/
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>a(anchor)태그</h1>
+        <h3>하이퍼링크, 책갈피, javascript 등을 수행할 때 사용함</h3>
+        <a href="hello.html">첫페이지로 이동</a>
+        <br>
+        <a href="https://daum.net">DAUM으로 이동</a>
+        <br>
+        <!-- 이미지에 링크걸기 -->
+        <a href="hello.html" title="hello.html 페이지로 이동">
+            <img src="./images/kim1.png" alt="">
+        </a>
+        <br>
+        <!-- block요소는 inline요소를 자식요소로 가질 수 있음 -->
+        <div>
+            <span>one</span> <span>two</span>
+        </div>
+        <br>
+        <!--inline요소는 원래 block요소를 자식요소로 가질 수 없음
+            단, a요소만 예외적으로 div같은 블록요소를 자식요소로 가질 수 있음-->
+
+        <a href="hello.html">
+            <div class="card">
+                <h3>어딜 눌러도 링크로 이동</h3>
+                <p>
+                    <img src="./images/kim2.png" alt="">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam eaque quo distinctio reiciendis dolorum, expedita obcaecati maxime in accusamus vero nihil doloribus nam itaque dolor esse cum earum. Tenetur, dignissimos.
+                </p>
+            </div>
+        </a>
+    </div>
+</body>
+</html>

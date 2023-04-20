@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step06_Event3.html</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+            background-color: yellow;
+            cursor: crosshair;  /*커서가 십자가 모양으로 바뀜*/
+        }
+    </style>
+</head>
+<body>
+    <h1>key event 활용해보기</h1>
+    <input type="text" id="inputMsg" placeholder="입력하시오">
+    <p id="result"></p>
+    <input type="text" id="result2">
+    <script>
+        document.querySelector("#inputMsg").addEventListener("keyup", (event)=>{
+            //event에는 발생한 key event에 대한 정보가 들어있음
+            console.log(event);
+            //입력한 문자열을 읽어와서
+            let msg = event.target.value;
+            //p요소의 innerText로 출력하기
+            document.querySelector("#result").innerText = msg;
+            //만일 Enter키를 눌렀다면 (단일 조건문)
+            if(event.key == "Enter"){
+                event.target.value = "";
+                document.querySelector("result2").value = msg;
+                document.querySelector("result").innerText = "";
+            }
+        })
+    </script>
+</body>
+</html>

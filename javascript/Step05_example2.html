@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step05_example2.html</title>
+</head>
+<body>
+    <h1>논리 연산자 테스트</h1>
+    <p>
+        유아전용 놀이 기구입니다 <br>
+        탑승조건 <br>
+        몸무게 30kg 미만 <br> 
+        키 150cm 미만 <br>
+    </p>
+    <input type="text" id="weight" placeholder="몸무게 입력"><br>
+    <input type="text" id="height" placeholder="키 입력"><br>
+    <button onclick="check()">확인하기</button>
+    <p id="result"></p>
+    <p id="result2"></p>
+    <script>
+       /*
+        키와 몸무게를 입력하고 확인하기 버튼을 눌렀을 떄
+        몸무게 30kg미만 그리고 키 150cm미만일 때
+        id가 result인 p요소의 innerText에 "탑승가능"을 출력하고
+        그렇지 않으면 "탑승불가"를 출력
+       */
+
+        let check = () => {
+            // 키와 몸무게를 읽어옴
+            let weight = document.querySelector("#weight").value
+            let height = document.querySelector("#height").value
+            // 미리 결과를 얻어낸 후 조건식에 결과값을 대입
+            let canRide = weight < 30 && height < 150;
+            if(canRide){
+                document.querySelector("#result").innerText = "탑승가능"
+            }else{
+                document.querySelector("#result").innerText = "탑승불가"
+            };
+            // 반대로 쓴 경우 
+            let cannotRide = weight >= 30 || height >=150;
+            if(cannotRide){
+                document.querySelector("#result2").innerText = "탑승불가"
+            }else{
+                document.querySelector("#result2").innerText = "탑승가능"
+            };
+        }
+    </script>
+</body>
+</html>

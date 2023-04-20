@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step06_DataType9.html</title>
+</head>
+<body>
+    <h1>JavaScript Data Type</h1>
+    <p><strong>Function</strong>의 Return type</p>
+    <script>
+        //undefined를 리턴하는 함수
+        function test(){
+            console.log("test() 호출됨");
+        }
+
+        //number type을 리턴하는 함수
+        function getNum(){
+            console.log("getNum() 호출됨");
+            return 999;
+        }
+
+        function getNum2(){
+            let num = 888;
+            console.log("getNum2() 호출됨");
+            //변수 안에있는 값을 변수명으로 리턴해줄수도 있음
+            return num; //리턴할 데이터를 참조하면 자동으로 참조된 값이 리턴됨
+        }
+
+        //string type을 리턴하는 함수
+        function getName(){
+            console.log("getName() 호출됨");
+            return "SuJeong";
+        }
+
+        //boolean type을 리턴하는 함수
+        function isEvent(){
+            console.log("isEvent() 호출됨");
+            return true;
+        }
+
+        //object type을 리턴하는 함수
+        function getMember(){
+            console.log("getMember() 호출됨");
+            let mem = {num:1, name:"SuJeong", addr:"서울"};
+            return mem;
+        }
+
+        //array type을 리턴하는 함수
+        function getFriends(){
+            console.log("getFriends() 호출됨");
+            let friends = ["희진", "수정", "영현", "초롱", "토토"];
+            return friends
+        }
+
+        let myObj = {
+            getData:function(){
+                let data = {num:1, name:"수정"};
+                return data;
+            }, 
+            getDatas:function(){
+                let food=["라면", "치킨", "피자"];
+                return food
+            }
+        }
+    </script>
+</body>
+</html>

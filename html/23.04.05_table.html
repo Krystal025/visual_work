@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step08_table3.html</title>
+    <style>
+        h1{
+            padding: auto;
+            text-align: center;
+        }
+        caption{
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: darkred;
+        }
+        .my-table{
+            border-collapse: collapse;
+            margin: auto;
+        }
+        .my-table .center{
+            text-align: center;
+        }
+        .my-table #head{
+            background-color: darkred;
+            border-bottom-width: 2px;
+            color: antiquewhite;
+        }
+        .my-table #foot{
+            background-color: darkred;
+            color: antiquewhite;
+        }
+        .my-table #body{
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <h1>0405 Table 꾸미기</h1>
+    <table border="1" class="my-table">
+        <caption><strong>GS25 현금, 카드 매출 내역</strong></caption>
+        <colgroup>
+            <col width="200">
+            <col width="100">
+            <col width="100">
+        </colgroup>
+        <thead class="center" id="head">
+            <tr>
+                <th>상품명</th>
+                <th>현금</th>
+                <th>카드</th>
+            </tr>
+        </thead>
+        <tfoot class="center" id="foot">
+            <tr>
+                <th>합계</th>
+                <td>4,300원</td>
+                <td>800원</td>
+            </tr>
+        </tfoot>
+        <tbody class="center" id="body">
+            <tr>
+                <td>삼각김밥</td>
+                <td>800</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>도시락</td>
+                <td>3,500</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>박카스</td>
+                <td>0</td>
+                <td>800</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
