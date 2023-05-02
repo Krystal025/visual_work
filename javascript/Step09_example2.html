@@ -73,6 +73,9 @@
             document.querySelector("#min").innerText = min;
             document.querySelector("#startBtn").innerText = "시작";
         })
+        document.querySelector("#recordBtn").addEventListener("click", (e) => {
+            documemt.querySelectorAll("ul li")[0].innerText = min +" : "+ sec
+        })
     </script>
 </body>
 
