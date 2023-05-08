@@ -49,13 +49,16 @@
         let rabbitIndex = 0;
         //카운트를 셀 변수
         let count = 0;
+        //효과음 로딩하기
+        const fireSound = new Audio("sounds/fire.wav");
+        const dieSound = new Audio("sounds/birddie.mp3");
 
         setInterval(()=>{
             //함수가 호출될 떄 마다 count를 1씩 증가시킴
             count++; //1초에 100씩 증가 
 
-            // context.clearRect(0, 0, 800, 500);
-
+            //이 함수 내부는 1/100초마다 한번씩 실행됨
+            //context.clearRect(0, 0, 800, 500);
             //배경이미지를 canvas의 크기에 맞게 그림
             context.drawImage(backImg, 0, 0, 800, 500);
             
@@ -95,11 +98,31 @@
             snipeY=e.offsetY;
         })
         canvas.addEventListener("mousedown", (e) => {
+            //mousedown이벤트가 발생한 곳의 좌표를 변수에 담아놓고 사용하기 
+            let x = e.offsetX;
+            let y = e.offsetY;
             //이벤트가 발생한 곳의 좌표를 object에 담는다
             //mousedown이벤트가 일어날 때마다 새로운 object가 생성된다 
-            const hole = {x:e.offsetX, y:e.offsetY};
+            // const hole = {x:x, y:y};
+            const hole = {x, y};  //위의 표현식을 줄여서 이렇게 쓸수있음  
             //그 object를 holes배열에 저장(누적)시킨다
             holes.push(hole);
+            //재생위치를 처음으로 리셋후
+            fireSound.currentTime = 0;
+            //총소리 재생시키면 연속으로 클릭해도 연속재생이 됨 
+            fireSound.play(); 
+            //토끼가 총에 맞았는지 판별해서 맞았으면 효과음 재생
+
+            //토끼가 총에 맞았는지 여부
+            let isRabbitDie = x > rabbitX-50 &&
+                              x < rabbitX+50 &&
+                              y > rabbitY-50 &&
+                              y < rabbitY+50;
+
+            if(isRabbitDie){
+                dieSound.currentTime = 0;
+                dieSound.play();
+            }
         })
     </script>
 </body>
