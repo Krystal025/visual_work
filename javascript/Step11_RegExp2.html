@@ -15,14 +15,15 @@
         document.querySelector("#one").addEventListener("input",(e)=>{
             //1. 입력한 문자열을 읽어와서 
             let str = e.target.value;
-            //2. 반드시 입력(한글자 이상)해야하고 특수문자는 허용하지 않습니다 조건을 만족하면
-            /*id가 result인 p요소의 innerText로 "Pass"를 출력하고 
+            /*2. 반드시 입력(한글자 이상)해야하고 특수문자는 허용하지 않습니다 조건을 만족하면
+                 id가 result인 p요소의 innerText로 "Pass"를 출력하고 
                  만족하지 않으면 "Fail"을 출력하시오 */
-            const reg = /^[\w]+$/;
-    
-            const isValid = reg.test(str);
+            //const reg = /^[\w]+$/;
+            const reg = new RegExp("^[\\w]+$");
+            //매칭 여부를 알아냄 
+            const isPass = reg.test(str);
 
-            if(isValid){
+            if(isPass){
                 document.querySelector("#result").innerText = "Pass"
             }else{
                 document.querySelector("#result").innerText = "Fail"
