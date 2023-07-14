@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step04_Cube.html</title>
+    <style>
+        .wrapper{
+            perspective: 500px;
+            perspective-origin: 50% 50%;
+        }
+        .cube{
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transform-origin: 50% 50%;
+            transform: translateZ(-200px);  /*뒤로 밀어놔야 돌렸을때 확대되지 않음*/
+        }
+        .cube > div{
+            border: 1px solid red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+        /* div의 폭이 400px이므로 절반인 200px씩 밀어낸 것  */
+        .cube > div:nth-child(1){
+            transform: translateZ(200px);  
+        }
+        .cube > div:nth-child(2){
+            transform: rotateY(90deg) translateZ(200px);
+        }
+        .cube > div:nth-child(3){
+            transform: rotateY(180deg) translateZ(200px);
+        }
+        .cube > div:nth-child(4){
+            transform: rotateY(270deg) translateZ(200px);
+        }
+        .cube > div:nth-child(5){
+            transform: rotateX(90deg) translateZ(200px);
+        }
+        .cube > div:nth-child(6){
+            transform: rotateX(-90deg) translateZ(200px);
+        }
+
+        /*적용되는 값 : 누적되지 않음 (절대값)*/
+        .cube:hover{
+            transition: transform .8s ease-in-out;
+            transform: translateZ(-200px) rotateX(45deg) rotateY(45deg);
+        }   
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3d cube 테스트</h3>
+        <div class="wrapper">
+            <!-- 이벤트 발생시점에 적용시킬 3D Transform (부모요소에 배치)-->
+            <div class="cube">
+                <!-- 페이지 로딩시점에 적용시킬 3D Transform (자식요소에 배치) -->
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>    
+            </div>
+        </div>
+    </div>
+</body>
+</html>

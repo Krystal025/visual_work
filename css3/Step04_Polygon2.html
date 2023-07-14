@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step04_Polygon2.html</title>
+    <style>
+        /* 텍스트 드래그 방지 */
+        div{
+            -ms-user-select: none; 
+            -moz-user-select: -moz-none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        div:hover{
+            cursor: grab;
+        }
+        div:active{
+            cursor: grabbing;
+        }
+        .wrapper{
+            perspective: 500px;
+            perspective-origin: 50% 50%;
+        }
+        .polygon{
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transform-origin: 50% 50%;
+            transform: translateZ(-200px);  /*뒤로 밀어놔야 돌렸을때 확대되지 않음*/
+        }
+        .polygon > div{
+            border: 1px solid violet;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            background-color: rgb(231, 195, 231);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+        
+        .nav{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+        /* transition 효과를 조건부로 적용하기 위한 클래스  */
+        .transition{
+            transition: transform .5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3d polygon 테스트</h3>
+        <div class="wrapper">
+            <div class="polygon">
+                
+            </div>
+        </div>
+        <div class="nav">
+            <button id="leftBtn">&larr;</button>
+            <button id="rightBtn">&rarr;</button>
+        </div>
+    </div>  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+    <script src="js/jquery.touchSwipe.js"></script>
+    <script>
+         //n 각형의 폭을 함수에 전달하면 div 를 배치할때 rotateY 값과 translateZ가 Object로 리턴되는 함수 
+        function getAngleNtz(n, width) {
+            var angle = Math.round(360 / n);
+            var tz = Math.round((width / 2) / Math.tan((angle * Math.PI) / (2 * 180)));
+            var obj = {
+                angle: angle,
+                tz: tz
+            };
+            return obj;
+        }
+        //n각형
+        const n = 12;
+        //div의 width
+        const width = 400;
+        //12각형 폭은 400px인 경우
+        const obj = getAngleNtz(n, width);
+        //배치하면서 회전시킬 각도
+        let angle = obj.angle;
+        //배치하면서 z축 방향으로 평행이동 해야하는 값
+        let tz = obj.tz
+
+        // div가 4개이므로, 반복문 4번 돌림
+        for(let i=0; i<n; i++){
+            const div = document.createElement("div");
+            //innerText 출력
+            div.innerText = i+1;
+            //.poligon에 추가
+            document.querySelector(".polygon").append(div);
+        }
+
+        document.querySelector(".polygon").style.transform = "translateZ(-"+tz+"px)"
+
+        //.polygon 안에있는 모든 div의 참조값을 배열로 얻어냄
+        const divs = document.querySelectorAll(".polygon div");
+        //반복문을 돌면서 모든 div에 transform을 적용시킴
+        
+        for(let i=0; i<divs.length; i++){
+            let rotate = i*angle;
+            //div의 폭이 400px이므로 절반인 200px씩 밀어낸 것 
+            divs[i].style.transform = "rotateY("+rotate+"deg) translateZ("+tz+"px)";
+        };
+
+        // 변수를 정의해서 y축의 값을 저장하도록 함 
+        let rY = 0;
+
+        //.poligon을 y축 기준으로 회전하는 함수 
+        function rotateY(){
+            document.querySelector(".polygon")
+                .style.transform = "translateZ(-"+tz+"px) rotateY("+rY+"deg)"
+        };
+
+        document.querySelector("#leftBtn").addEventListener("click",()=>{
+            document.querySelector(".polygon").classList.add("transition");
+            rY -= angle;
+            rotateY();
+        });
+        
+        document.querySelector("#rightBtn").addEventListener("click",()=>{
+            document.querySelector(".polygon").classList.add("transition");
+            rY += angle;
+            rotateY();
+        });
+
+        //터치가 시작된 시점의 rY값을 저장할 변수 (값 누적 방지)
+        let startRY = 0;
+        //.poligon에 발생하는 touch 이벤트 처리 
+        $(".polygon").swipe({
+            swipeStatus(event, phase, direction, distance){
+                if(phase=="start"){
+                //터치 시작일때 
+                    //transition 제거
+                    $(".polygon").removeClass("transition");
+                    startRY = rY;
+                }else if(phase=="move"){
+                //터치후 움직이는 상태
+                    if(direction == "left"){
+                        //swipe한 거리에 비례해서 움직이기 
+                        rY = startRY - distance/10;
+                    }else if(direction == "right"){
+                        rY = startRY + distance/10;
+                    }
+                    rotateY();
+                }else if(phase=="cancel"){
+                //터치하고 조금만 움직이고 띤 상태 
+                    //transtion 추가 
+                    $(".polygon").addClass("transition");
+                    //취소 되었을 때 rY값을 원상복구 시켜야함
+                    rY = startRY;
+                    rotateY();
+                }else if(phase=="end"){
+                //터치하고 일정 역치 이상 움직이고 띤 상태 
+                    //transtion 추가 
+                    $(".polygon").addClass("transition");
+                    //이미 움직이고 난 값은 제외시킴 
+                    if(direction == "left"){
+                        rY = startRY - angle;
+                        rotateY();
+                    }else if(direction == "right"){
+                        rY = startRY + angle;
+                        rotateY();
+                    }
+                }
+            }, 
+            threshold: 120 //cancel 임계치를 높여줌 (default: 75)
+        });
+    </script>
+</body>
+</html>

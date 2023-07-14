@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step03_example4.html</title>
+    <link rel="stylesheet" href="css/animate.css">
+    <style>
+        .box{
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+            border: 1px solid red;
+            background-color: yellow;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .box{
+            animation: zoomIn .5s ease-out;
+        }
+        .box img{
+            width: 100px;
+            height: 100px;
+            /* click 혹은 마우스 이벤트를 받지 않도록 함 */
+            pointer-events: none;
+        }
+        /*animate css에 정의된 클래스를 사용하되 원하는 option으로 
+          동작하게 하고싶으면 css를 추가로 적용시키면 됨*/
+        .animate__bounce{
+            animation-iteration-count: 3;
+            animation-duration: 2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!--
+            class="animate__animated animate__키프레임명"
+            위와 같은 클래스를 어떤 요소에 추가하면 페이지 로딩시점에 한번 동작하게 됨
+        -->
+        <h1 class="animate__animated animate__bounce">An animated element</h1>
+        <div class="wrapper">
+            
+        </div>
+    </div>
+    <script>
+        //ajax 요청으로 받아온 출력할 이미지의 경로라고 가정
+        let images = ["images/image1.png","images/image2.png","images/image3.png",
+                        "images/image4.png","images/image5.png"];
+        
+        let index = 0;    
+                    
+        function makeBox(){
+            //div 요소를 동적으로 만들어서 참조값을 얻어냄
+            const box = document.createElement("div");
+            //box 클래스 추가
+            box.classList.add("box");
+            //img 요소 생성
+            const img = document.createElement("img");
+            //이미지 출력
+            img.setAttribute("src",images[index]);
+            //box div에 추가
+            box.append(img);
+            index++;
+            //만약 존재하지 않는 인덱스라면 처음으로 되돌림
+            if(index == images.length){
+                index = 0;
+            }
+            //.wrapper div의 자식요소로 추가 
+            document.querySelector(".wrapper").append(box);
+            box.addEventListener("click",(e)=>{
+                e.target.remove();
+                makeBox();
+            })
+        }
+        makeBox();
+    </script>
+</body>
+</html>

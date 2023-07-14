@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step04_Cube3.html</title>
+    <style>
+        .wrapper{
+            perspective: 500px;
+            perspective-origin: 50% 50%;
+        }
+        .cube{
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transform-origin: 50% 50%;
+            transform: translateZ(-200px);  /*뒤로 밀어놔야 돌렸을때 확대되지 않음*/
+            transition: transform 1s ease-out;
+        }
+        .cube > div{
+            border: 1px solid violet;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            background-color: rgb(231, 195, 231);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+        
+        .nav{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3d cube 테스트</h3>
+        <div class="wrapper">
+            <div class="cube">
+                
+            </div>
+        </div>
+        <div class="nav">
+            <button id="leftBtn">&larr;</button>
+            <button id="rightBtn">&rarr;</button>
+        </div>
+    </div>
+    <script>
+        // div가 4개이므로, 반복문 4번 돌림
+        for(let i=0; i<4; i++){
+            const div = document.createElement("div");
+            //innerText 출력
+            div.innerText = i+1;
+            //.cube에 추가
+            document.querySelector(".cube").append(div);
+        }
+
+        //.cube 안에있는 모든 div의 참조값을 배열로 얻어냄
+        const divs = document.querySelectorAll(".cube div");
+        //반복문을 돌면서 모든 div에 transform을 적용시킴
+        
+        for(let i=0; i<divs.length; i++){
+            let rotate = i*90;
+            divs[i].style.transform = "rotateY("+rotate+"deg) translateZ(200px)";
+        };
+
+        // 변수를 정의해서 y축의 값을 저장하도록 함 
+        let rY = 0;
+
+        document.querySelector("#leftBtn").addEventListener("click",()=>{
+            rY -= 90;
+            document.querySelector(".cube")
+                .style.transform = "translateZ(-200px) rotateY("+rY+"deg)"
+        });
+        
+        document.querySelector("#rightBtn").addEventListener("click",()=>{
+            rY += 90;
+            document.querySelector(".cube")
+                //문자열을 ``백틱으로 작성하면, 문자열 연결시 ${} 사용가능
+                .style.transform = `translateZ(-200px) rotateY(${rY}deg)`
+        });
+    </script>
+</body>
+</html>

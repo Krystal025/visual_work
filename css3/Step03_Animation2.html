@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step03_Animation2.html</title>
+    <style>
+        .round{
+            border: 1px solid red;
+            border-radius: 50%;
+        }
+
+        /* 페이지 로딩시점에 한번만 실행됨 */
+        #kim{
+             /* 
+                rotateAni : 키프레임명
+                3s : 애니메이션 적용시간
+                2 : 애니메이션 반복횟수  (무한반복 : infinite)
+                linear : timing function
+                alternate : 왕복여부 (0%->100%$->0%)
+            */
+            animation: rotateAni 3s 2 linear alternate
+        }
+
+        /* 마우스가 hover될 때마다 실행됨 */
+        #kim2:hover{
+            /* animation-name: rotateAni;
+               animation-duration:  3s;
+               animation-timing-function: linear;
+               위의 3줄을 줄여서 사용가능 */
+            animation: rotateAni 3s linear;
+        }
+
+        /* rotate 클래스가 추가되는 시점에 실행됨 
+           추가될때마다 실행시키고 싶으면 애니메이션이
+           끝난시점에 rotate 클래스를 제거해줘야함 */
+        .rotate{
+            animation: rotateAni 3s linear;
+        }
+        /* animation keyframe 정의 */
+        @keyframes rotateAni {
+            0%{
+                transform: rotate(0deg);
+                background-color: #ffffff;
+            }
+            50%{
+                transform: rotate(180deg);
+                background-color: aqua;
+            }
+            100%{
+                transform: rotate(360deg);
+                background-color: #ff00ff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Animation 테스트</h3>
+        <img id="kim" class="round" src="images/kim1.png" >
+        <img id="kim2" class="round" src="images/kim1.png" >
+        <img id="kim3" class="round" src="images/kim1.png" >
+        <img id="kim4" class="round rotate" src="images/kim1.png" >
+    </div>
+    <script>
+        //#kim3는 클릭했을 때 rotateAni라는 키프레임이 적용되도록 하시오
+        document.querySelector("#kim3").addEventListener("click",(e)=>{
+            e.target.style.animation = "rotateAni 3s linear";
+        });
+        document.querySelector("#kim4").addEventListener("click",(e)=>{
+            e.target.classList.add("rotate");
+        });
+        //animation이 종료되면 animationend라는 이벤트가 발생함
+        document.querySelector("#kim4").addEventListener("animationend",(e)=>{
+            //rotate 클래스를 제거하면 다시 추가될 때 animation이 적용됨
+            e.target.classList.remove("rotate");
+        })
+    </script>
+</body>
+</html>

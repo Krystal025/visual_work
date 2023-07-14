@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step04_Polygon.html</title>
+    <style>
+        /* 텍스트 드래그 방지 */
+        div{
+            -ms-user-select: none; 
+            -moz-user-select: -moz-none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        div:hover{
+            cursor: grab;
+        }
+        div:active{
+            cursor: grabbing;
+        }
+        .wrapper{
+            perspective: 500px;
+            perspective-origin: 50% 50%;
+        }
+        .polygon{
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transform-origin: 50% 50%;
+            transform: translateZ(-200px);  /*뒤로 밀어놔야 돌렸을때 확대되지 않음*/
+            transition: transform 1s ease-out;
+        }
+        .polygon > div{
+            border: 1px solid violet;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            background-color: rgb(231, 195, 231);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+        
+        .nav{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3d polygon 테스트</h3>
+        <div class="wrapper">
+            <div class="polygon">
+                
+            </div>
+        </div>
+        <div class="nav">
+            <button id="leftBtn">&larr;</button>
+            <button id="rightBtn">&rarr;</button>
+        </div>
+    </div>
+    <script>
+         //n 각형의 폭을 함수에 전달하면 div 를 배치할때 rotateY 값과 translateZ가 Object로 리턴되는 함수 
+        function getAngleNtz(n, width) {
+            var angle = Math.round(360 / n);
+            var tz = Math.round((width / 2) / Math.tan((angle * Math.PI) / (2 * 180)));
+            var obj = {
+                angle: angle,
+                tz: tz
+            };
+            return obj;
+        }
+        //n각형
+        const n = 12;
+        //div의 width
+        const width = 400;
+        //12각형 폭은 400px인 경우
+        const obj = getAngleNtz(n, width);
+        //배치하면서 회전시킬 각도
+        let angle = obj.angle;
+        //배치하면서 z축 방향으로 평행이동 해야하는 값
+        let tz = obj.tz
+
+        // div가 4개이므로, 반복문 4번 돌림
+        for(let i=0; i<n; i++){
+            const div = document.createElement("div");
+            //innerText 출력
+            div.innerText = i+1;
+            //.poligon에 추가
+            document.querySelector(".polygon").append(div);
+        }
+
+        document.querySelector(".polygon").style.transform = "translateZ(-"+tz+"px)"
+
+        //.polygon 안에있는 모든 div의 참조값을 배열로 얻어냄
+        const divs = document.querySelectorAll(".polygon div");
+        //반복문을 돌면서 모든 div에 transform을 적용시킴
+        
+        for(let i=0; i<divs.length; i++){
+            let rotate = i*angle;
+            //div의 폭이 400px이므로 절반인 200px씩 밀어낸 것 
+            divs[i].style.transform = "rotateY("+rotate+"deg) translateZ("+tz+"px)";
+        };
+
+        // 변수를 정의해서 y축의 값을 저장하도록 함 
+        let rY = 0;
+
+        function left(){
+            rY -= angle;
+            document.querySelector(".polygon")
+                .style.transform = "translateZ(-"+tz+"px) rotateY("+rY+"deg)"
+        };
+        function right(){
+            rY += angle;
+            document.querySelector(".polygon")
+                .style.transform = "translateZ(-"+tz+"px) rotateY("+rY+"deg)"
+        };
+
+        document.querySelector("#leftBtn").addEventListener("click",()=>{
+            left();
+        });
+        
+        document.querySelector("#rightBtn").addEventListener("click",()=>{
+            right();
+        });
+
+        //터치 슬라이드로 회전시키기 
+        document.querySelector(".polygon").addEventListener("mousedown",(e)=>{
+            startX = e.pageX;   //마우스 드래그 시작 위치
+        })
+        document.querySelector(".polygon").addEventListener("mouseup",(e)=>{
+            endX = e.pageX;
+            if(startX < endX){
+                right();
+            }else if(startX > endX){
+                left();
+            }
+        })
+
+        //방향키로 회전시키기 
+        document.addEventListener("keydown",(e)=>{
+            if(e.keyCode == 37){
+                left();
+            }else if(e.keyCode == 39){
+                right();
+            }
+        });
+        
+    </script>
+</body>
+</html>
