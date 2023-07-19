@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step05_Flex.html</title>
+</head>
+<style>
+    .box{
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        background-color: yellow;
+    }
+    .wrapper{
+        height: 500px;
+        background-color: antiquewhite;
+        /* 자식 요소들을 일렬로 배치 */
+        display: flex;
+        /* 자식 요소들이 일렬로 배치되는 순서와 축(가로 / 세로)을 결정  
+           속성값 : row | row-reverse | column | column-height */
+        flex-direction: row;
+        /* 주축을 결정 
+           컨테이너가 더이상 아이템들을 한 줄에 담을 여유공간이 없을 때
+           아이템 줄바꿈을 결정하는 속성
+           속성값 : wrap | nowrap | wrap-reverse */
+        flex-wrap: wrap;
+        /* 주축 방향으로 정렬
+           주축에 따라 가로정렬 or 세로정렬이 될 수 있음 
+           주축 : flex-direction의 속성값으로 결정됨 
+           속성값 : flex-start | flex-end | center | space-between | space-around | space-evenly*/
+        justify-content: center;
+        /* 주축의 수직방향으로 정렬 
+           속성값 : stretch | flex-start | flex-end | center | baseline*/
+        align-items: center;
+        /* 주축의 수직방향으로 정렬 (단, flex-wrap으로 인해 두줄 이상이 됐을 경우에만)
+           flex-wrap이 nowrap이면 효과가 없음
+           속성값 : stretch | flex-start | flex-end | center | space-between | space-around */
+        align-content: flex-end;
+
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>블럭요소를 가로로 배치하는 테스트</h1>
+        <div class="wrapper">
+            <div class="box">div1</div>
+            <div class="box">div2</div>
+            <div class="box">div3</div>
+            <div class="box">div4</div>
+            <div class="box">div5</div>
+            <div class="box">div6</div>
+            <div class="box">div7</div>
+            <div class="box">div8</div>
+            <div class="box">div9</div>
+            <div class="box">div10</div>        
+        </div>
+    </div>
+</body>
+</html>
