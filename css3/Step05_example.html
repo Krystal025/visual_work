@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step05_example.html</title>
+</head>
+<style>
+    .main-nav{
+        background-color: rgb(117, 32, 44);
+        padding: 1rem;
+        border-radius: 5px;
+    }
+    .main-nav > ul{
+        /* ul의 기본스타일 제거 */
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+    .main-nav li a{
+        color: antiquewhite;
+        text-decoration: none;
+        font-size: 20px;
+    }
+    .main-nav li a:hover{
+        text-decoration: underline;
+    }
+    /* 반응형 레이아웃 */
+    @media(max-width: 575px){
+        .main-nav > ul{
+            flex-direction: column;
+        }
+    }
+</style>
+<body>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#">Logo</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Study</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
